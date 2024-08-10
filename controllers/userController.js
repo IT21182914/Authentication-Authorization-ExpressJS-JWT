@@ -1,13 +1,14 @@
 exports.dashboard = (req, res) => {
   const { role } = req.user;
 
-  if (role === "Admin") {
-    res.json({ message: "Admin Dashboard" });
-  } else if (role === "Manager") {
-    res.json({ message: "Manager Dashboard" });
-  } else if (role === "User") {
-    res.json({ message: "User Dashboard" });
-  } else {
-    res.status(403).json({ message: "Access Denied" });
+  switch (role) {
+    case "Admin":
+      return res.json({ message: "Welcome to the Admin Dashboard" });
+    case "Manager":
+      return res.json({ message: "Welcome to the Manager Dashboard" });
+    case "User":
+      return res.json({ message: "Welcome to the User Dashboard" });
+    default:
+      return res.status(403).json({ message: "Access Denied" });
   }
 };
